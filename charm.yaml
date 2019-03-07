@@ -20,7 +20,7 @@ provides:
 series:
    - kubernetes
 resources:
-  mariadb-image:
+  mariadb:
     type: oci-image
     description: "Image used for mariadb workload."
     auto-fetch: true
@@ -29,3 +29,14 @@ storage:
   database:
     type: filesystem
     location: /var/lib/mysql
+modules:
+  - caas-base
+  - docker-resource
+interfaces:
+  - database
+config:
+  root-password:
+    description: |
+      Password to use for the database root user. If not specified,
+      one will be generated automatically.
+    type: string
